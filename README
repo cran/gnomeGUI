@@ -1,0 +1,5 @@
+This is a version of the gnome module shipped with R up to versions 2.0.x.
+It is now a separate front end: how to use it is described in the
+R-admin manual in R 2.1.0 and later (and that version of R is required).
+
+The R core team
