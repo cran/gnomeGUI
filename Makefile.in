@@ -25,7 +25,7 @@ INSTALL_PROGRAM = ${INSTALL}
 MKINSTALLDIRS = $(srcdir)/mkinstalldirs
 
 DEFS = -DHAVE_CONFIG_H
-ALL_CPPFLAGS = -I. -I$(R_HOME)/include $(GNOME_INCLUDEDIR) $(LIBGLADE_CFLAGS) $(CPPFLAGS) $(DEFS)
+ALL_CPPFLAGS = -I. -I$(R_HOME)/include -I$(R_HOME)/include${R_ARCH} $(GNOME_INCLUDEDIR) $(LIBGLADE_CFLAGS) $(CPPFLAGS) $(DEFS)
 ALL_CFLAGS = @CFLAGS@
 ALL_GNOME_LIBS = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(LIBGLADE_LIBS)
 MAIN_LINK = $(CC) $(LD_FLAGS)
@@ -86,7 +86,7 @@ $(R_binary): $(OBJECTS)
 	$(MAIN_LINK) -o $@ $(OBJECTS) $(ALL_GNOME_LIBS) $(LIBS) $(LIBR)
 
 install:
-	@${INSTALL_PROGRAM} $(R_binary) "$(prefix)/bin/exec/Rgnome"
+	@${INSTALL_PROGRAM} $(R_binary) "$(prefix)/bin/exec${R_ARCH}/Rgnome"
 	@${MKINSTALLDIRS} "$(prefix)/share/glade"
 	@$(INSTALL_PROGRAM) $(srcdir)/glade/gnome-interface.glade "$(prefix)/share/glade"
 install-strip:

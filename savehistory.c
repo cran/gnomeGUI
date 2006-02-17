@@ -22,7 +22,10 @@
 #include "gtkconsole.h"
 #include "terminal.h"
 
+#include <Rversion.h>
+#ifdef R_VERSION < R_Version(2, 3, 0) 
 extern void Rf_errorcall(SEXP, const char*, ...);
+#endif
 
 void Rgnome_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
