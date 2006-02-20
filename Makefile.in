@@ -11,36 +11,22 @@ R_HOME = @R_HOME@
 
 prefix = $(R_HOME)
 
+include $(R_HOME)/etc${R_ARCH}/Makeconf
+
 GNOMEUI_LIBS = @GNOMEUI_LIBS@
 GNOME_LIBDIR = @GNOME_LIBDIR@
 GNOME_INCLUDEDIR = @GNOME_INCLUDEDIR@
 LIBGLADE_CFLAGS = @LIBGLADE_CFLAGS@
 LIBGLADE_LIBS = @LIBGLADE_LIBS@
 
-CC = @CC@
-CC_M = @CC_M@
-SED = @SED@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = ${INSTALL}
 MKINSTALLDIRS = $(srcdir)/mkinstalldirs
 
 DEFS = -DHAVE_CONFIG_H
-ALL_CPPFLAGS = -I. -I$(R_HOME)/include -I$(R_HOME)/include${R_ARCH} $(GNOME_INCLUDEDIR) $(LIBGLADE_CFLAGS) $(CPPFLAGS) $(DEFS)
-ALL_CFLAGS = @CFLAGS@
+ALL_CPPFLAGS = -I. $(R_XTRA_CPPFLAGS) $(GNOME_INCLUDEDIR) $(LIBGLADE_CFLAGS) $(CPPFLAGS) $(DEFS)
 ALL_GNOME_LIBS = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(LIBGLADE_LIBS)
 MAIN_LINK = $(CC) $(LD_FLAGS)
-LIBR = @LIBR@
-
-.SUFFIXES:
-.SUFFIXES: .c .d .o
-
-.c.o:
-	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c $< -o $@
-.c.d:
-	@echo "making $@ from $<"
-	@$(CC_M) $(ALL_CPPFLAGS) $< | \
-          $(SED) -e 's/^\([^:]*\)\.o\([         ]\)*:/\1.o \1.lo\2:/' > $@
-
 
 SOURCES = \
 	command-grep.c \

@@ -24,7 +24,7 @@
 
 AC_PREREQ(2.59)
 
-AC_INIT([Rgnome], [2.1.0], [r-bugs@R-project.org], [Rgnome])
+AC_INIT([Rgnome], [2.3.0], [r-bugs@R-project.org], [Rgnome])
 : ${R_HOME=`R RHOME`}
 if test -z "${R_HOME}"; then
   echo "could not determine R_HOME"
@@ -38,8 +38,10 @@ echo "Using R Installation in R_HOME=${R_HOME}"
 ## '/usr/local' are found (by the native tools, mostly).
 ## We do it here because AC_ARG_WITH(gnome) may add to CPPFLAGS and
 ## LDFLAGS.
-: ${CPPFLAGS="-I/usr/local/include"}
-: ${LDFLAGS="-L/usr/local/lib"}
+cppflags=`${R_HOME}/bin/R CMD config CPPFLAGS`
+ldflags=`${R_HOME}/bin/R CMD config LDFLAGS`
+: ${CPPFLAGS="${cppflags}"}
+: ${LDFLAGS="${ldflags}"}
 
 ### ** Handle arguments to configure.
 
@@ -58,37 +60,25 @@ else
   want_gnome=yes
   want_R_shlib=yes
   CPPFLAGS="${CPPFLAGS} -I${withval}/include"
+## <FIXME> what about lib64?
   LDFLAGS="${LDFLAGS} -L${withval}/lib"
   gnome_prefix="${withval}/lib"
 fi],
 [want_gnome=yes])
 
+## necessary but not sufficient test
 LIBR=`${R_HOME}/bin/R CMD config --ldflags`
 if test "${LIBR}" = ""; then
   echo "Need a shared R library"
   exit 1
 fi
-AC_SUBST(LIBR)
 
 CC=`${R_HOME}/bin/R CMD config CC`
 CFLAGS=`${R_HOME}/bin/R CMD config CFLAGS`
 
-## we would like a POSIX sed, and need one on Solaris
-AC_PATH_PROGS(SED, sed, /bin/sed, [/usr/xpg4/bin:$PATH])
-## Make
-: ${MAKE=make}
-AC_SUBST(MAKE)
-
 AC_PROG_INSTALL
 
-
 AC_CHECK_HEADERS(fcntl.h locale.h string.h strings.h)
-
-## need to fathom out if GCC first.
-R_PROG_CC_M
-CC_M=${r_cv_prog_cc_m}
-AC_SUBST(CC_M)
-
 
 R_GNOME
 
