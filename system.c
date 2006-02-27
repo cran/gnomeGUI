@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997--2004  Robert Gentleman, Ross Ihaka
+ *  Copyright (C) 1997--2006  Robert Gentleman, Ross Ihaka
  *                            and the R Development Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -262,6 +262,7 @@ int main(int ac, char **av)
     ptr_R_ChooseFile = Rgnome_ChooseFile;
     ptr_R_loadhistory = Rgnome_loadhistory;
     ptr_R_savehistory = Rgnome_savehistory;
+    ptr_R_addhistory = Rgnome_addhistory;
 
     R_timeout_handler = NULL;
     R_timeout_val = 0;

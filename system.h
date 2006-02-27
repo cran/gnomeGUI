@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2004  the R Development Core Team
+ *  Copyright (C) 2004-6  the R Development Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,3 +34,4 @@ void Rgnome_FlushConsole(void);
 void Rgnome_ClearerrConsole(void);
 void Rgnome_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env);
 void Rgnome_savehistory(SEXP call, SEXP op, SEXP args, SEXP env);
+void Rgnome_addhistory(SEXP call, SEXP op, SEXP args, SEXP env);

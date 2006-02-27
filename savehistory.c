@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-4   the R Development Core Team
+ *  Copyright (C) 2000-6   the R Development Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -52,4 +52,23 @@ void Rgnome_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
     strcpy(file, R_ExpandFileName(CHAR(STRING_ELT(sfile, 0))));
     gtk_console_save_history(GTK_CONSOLE(R_gtk_terminal_text), 
 			     file, R_HistorySize, NULL);
+}
+
+void Rgnome_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
+{
+    SEXP stamp;
+    int i;
+    GtkConsole * object = GTK_CONSOLE(R_gtk_terminal_text);
+    gchar *history_buf;
+    
+    stamp = CAR(args);
+    if (!isString(stamp))
+    	Rf_errorcall(call, _("invalid timestamp"));
+    for (i = 0; i < LENGTH(stamp); i++) {
+	history_buf = g_malloc (strlen(CHAR(STRING_ELT(stamp, i))) + 1);
+	strcpy (history_buf, CHAR(STRING_ELT(stamp, i)));
+	GTK_CONSOLE (object)->history =
+	    g_list_prepend (GTK_CONSOLE (object)->history, history_buf);
+	GTK_CONSOLE (object)->history_num_items++;	
+    }
 }
