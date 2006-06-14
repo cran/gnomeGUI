@@ -1,5 +1,87 @@
-This is a version of the gnome module shipped with R up to versions 2.0.x.
-It is now a separate front end: how to use it is described in the
-R-admin manual in R 2.1.0 and later (and that version of R is required).
+This is a version of the gnome module shipped with R up to versions
+2.0.x.  It is now a separate front end: how to use it is described in
+the R-admin manual in R 2.1.0 to 2.3.1.  For later versions of R the
+information is reproduced here.  
+
+This interface is experimental and incomplete.  The console offers a
+basic command line editing and history mechanism, along with tool and
+button bars that give a point-and-click console to some R commands.
+Many of the features of the console are currently stubs, and the
+console is no longer under development: it has been kept available as
+an example of adding a front-end to R.
+
+A gtk() graphics device (a port of the x11() device to GDK (the GIMP
+Drawing Kit)) is available from CRAN as package gtkDevice: this
+cooperates rather better with the console than the x11() device.
+
+
+Installing gnomeGUI
+===================
+
+The package can be installed like any other, e.g.
+
+	R CMD INSTALL gnomeGUI_2.x.y.tar.gz
+
+It is necessary to have compiled R as a shared library (via
+--enable-R-shlib), and installed it to its final destination.
+
+You will need at least the following packages installed:
+
+audiofile-0.2.1
+esound-0.2.23
+glib-1.2.10
+gtk+-1.2.10
+imlib-1.9.10
+ORBit-0.5.12
+gnome-libs-1.4.1.2
+libxml-1.8.16
+libglade-0.17
+
+Later versions are acceptable, but not e.g. gnome2 or libglade2.
+
+Remember that some package management systems (such as RPM and deb)
+make a distinction between the user version of a package and the
+developer version.  The latter usually has the same name but with the
+extension -devel or -dev.  If you use a pre-packaged version of GNOME
+then you must have the developer versions of the above packages in
+order to compile the gnomeGUI package.
+
+
+For greater control, gnomeGUI can be configured and built
+independently of R.  Create a build directory, and from there run
+
+/path/to/gnomeGUI/configure R_HOME=/path/to/R/installation
+make
+make install
+
+This installs the two files bin/exec/Rgnome and
+share/glade/gnome-interface.glade in under R_HOME.
+
+The full list of options to this configure is
+
+R_HOME
+the directory (containing file bin/R ) of the R installation
+
+--with-gnome
+specify the prefix for the GNOME dirs
+
+--with-gnome-includes=DIR
+specify location of GNOME headers
+
+--with-gnome-libs=DIR
+specify location of GNOME libs
+
+--with-libglade-config=LIBGLADE_CONFIG
+specify location of libglade-config
+
+
+Using gnomeGUI
+==============
+
+One the package is installed, invoke R by one of
+
+	R -g gnome
+	R --gui=gnome
+
 
 The R core team
