@@ -67,9 +67,9 @@ fi],
 [want_gnome=yes])
 
 ## necessary but not sufficient test
-LIBR=`${R_HOME}/bin/R CMD config --ldflags`
-if test "${LIBR}" = ""; then
-  echo "Need a shared R library"
+R_LIB=`${R_HOME}/bin/R CMD config --ldflags`
+if test -z "${R_LIB}"; then
+  echo "Need R built as a library"
   exit 1
 fi
 
@@ -82,6 +82,7 @@ AC_CHECK_HEADERS(fcntl.h locale.h string.h strings.h)
 
 R_GNOME
 
+AC_SUBST(R_LIB)
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_FILES([Makefile])
 

@@ -23,7 +23,8 @@ The package can be installed like any other, e.g.
 	R CMD INSTALL gnomeGUI_2.x.y.tar.gz
 
 It is necessary to have compiled R as a shared library (via
---enable-R-shlib), and installed it to its final destination.
+--enable-R-shlib) or (from R 2.7.0) as a static library (via
+--enable-R-static-lib).
 
 You will need at least the following packages installed:
 
