@@ -8,7 +8,8 @@ basic command line editing and history mechanism, along with tool and
 button bars that give a point-and-click console to some R commands.
 Many of the features of the console are currently stubs, and the
 console is no longer under development: it has been kept available as
-an example of adding a front-end to R.
+an example of adding a front-end to R.  It uses the long-obsolete
+version 1.x of the GNOME libraries. 
 
 A gtk() graphics device (a port of the x11() device to GDK (the GIMP
 Drawing Kit)) is available from CRAN as package gtkDevice: this

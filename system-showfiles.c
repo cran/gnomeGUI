@@ -257,8 +257,8 @@ void pager_set_style()
 
 #define BUFSIZE  2048
 
-int Rgnome_ShowFiles(int nfile, char **file, char **title, char *wtitle,
-		     Rboolean del, char *pager) 
+int Rgnome_ShowFiles(int nfile, const char **file, const char **title,
+		     const char *wtitle, Rboolean del, const char *pager) 
 {
   pager_data_t *pager_data;
   GtkWidget *table, *vscrollbar;
@@ -279,7 +279,7 @@ int Rgnome_ShowFiles(int nfile, char **file, char **title, char *wtitle,
     return 0;
 
   if((wtitle != NULL) && (*wtitle != '\0'))
-    realtitle = wtitle;
+      realtitle = (char *)wtitle;
   else
     realtitle = "R pager";
 

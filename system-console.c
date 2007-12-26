@@ -46,7 +46,7 @@ R_gtk_terminal_line_event (GtkWidget * widget)
 
 /* Fill a text buffer with user typed console input. */
 int
-Rgnome_ReadConsole (char *prompt, unsigned char *buf, int len,
+Rgnome_ReadConsole (const char *prompt, unsigned char *buf, int len,
 		    int addtohistory)
 {
   if (!R_Interactive)
@@ -60,8 +60,8 @@ Rgnome_ReadConsole (char *prompt, unsigned char *buf, int len,
     }
    else
     {
-      gtk_console_enable_input (GTK_CONSOLE (R_gtk_terminal_text), prompt,
-				strlen (prompt));
+      gtk_console_enable_input (GTK_CONSOLE (R_gtk_terminal_text), 
+				(char *) prompt, strlen (prompt));
       gtk_signal_connect (GTK_OBJECT (R_gtk_terminal_text),
 			  "console_line_ready",
 			  GTK_SIGNAL_FUNC (R_gtk_terminal_line_event), NULL);
@@ -80,9 +80,9 @@ Rgnome_ReadConsole (char *prompt, unsigned char *buf, int len,
 /* Write a text buffer to the console. */
 /* All system output is filtered through this routine. */
 void
-Rgnome_WriteConsole (char *buf, int len)
+Rgnome_WriteConsole (const char *buf, int len)
 {
-  gtk_console_write (GTK_CONSOLE (R_gtk_terminal_text), buf, len);
+    gtk_console_write (GTK_CONSOLE (R_gtk_terminal_text), (char *)buf, len);
 }
 
 /* Indicate that input is coming from the console */
