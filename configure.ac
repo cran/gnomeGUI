@@ -24,7 +24,7 @@
 
 AC_PREREQ(2.59)
 
-AC_INIT([Rgnome], [2.3.0], [r-bugs@R-project.org], [Rgnome])
+AC_INIT([Rgnome], [2.7.0], [r-bugs@R-project.org], [Rgnome])
 : ${R_HOME=`R RHOME`}
 if test -z "${R_HOME}"; then
   echo "could not determine R_HOME"
